@@ -6,6 +6,7 @@ angular.module('ioControlApp', [
   'ioControlApp.constants',
   'ngCookies',
   'ngResource',
+  'ui.select',
   'ngSanitize',
   'ui.router',
   'ui.bootstrap',

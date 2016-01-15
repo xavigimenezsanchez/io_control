@@ -61,7 +61,9 @@ function handleError(res, statusCode) {
 
 // Gets a list of Matriculas
 export function index(req, res) {
-  Matricula.findAsync()
+  //Matricula.findAsync()
+  Matricula.find()
+    .populate('company')
     .then(respondWithResult(res))
     .catch(handleError(res));
 }

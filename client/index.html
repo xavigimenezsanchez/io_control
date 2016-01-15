@@ -13,6 +13,7 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(client) app/vendor.css -->
       <!-- bower:css -->
+      <link rel="stylesheet" href="bower_components/ui-select/dist/select.css" />
       <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css({.tmp,client}) app/app.css -->
@@ -55,6 +56,7 @@
       <script src="bower_components/lodash/dist/lodash.compat.js"></script>
       <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
       <script src="bower_components/angular-validation-match/dist/angular-validation-match.min.js"></script>
+      <script src="bower_components/ui-select/dist/select.js"></script>
       <!-- endbower -->
     <!-- endbuild -->
     <!-- build:js(.tmp) app/app.js -->
@@ -63,7 +65,7 @@
       <script src="app/admin/admin.module.js"></script>
       <script src="components/auth/auth.module.js"></script>
       <script src="components/util/util.module.js"></script>
-      <script src="app/empresa/empresaeditar/empresaeditar.js"></script>
+      <script src="app/main/main.controller.js"></script>
       <script src="app/admin/admin.controller.js"></script>
       <script src="app/account/account.js"></script>
       <script src="app/admin/admin.router.js"></script>
@@ -79,11 +81,18 @@
       <script src="app/empresa/empresa.js"></script>
       <script src="app/empresa/empresa.service.js"></script>
       <script src="app/empresa/empresaeditar/empresaeditar.controller.js"></script>
-      <script src="app/account/login/login.controller.js"></script>
+      <script src="app/empresa/empresaeditar/empresaeditar.js"></script>
       <script src="app/empresa/empresanueva/empresanueva.controller.js"></script>
       <script src="app/empresa/empresanueva/empresanueva.js"></script>
-      <script src="app/main/main.controller.js"></script>
+      <script src="app/account/login/login.controller.js"></script>
       <script src="app/main/main.js"></script>
+      <script src="app/matricula/matricula.controller.js"></script>
+      <script src="app/matricula/matricula.js"></script>
+      <script src="app/matricula/matricula.service.js"></script>
+      <script src="app/matricula/matriculaeditar/matriculaeditar.controller.js"></script>
+      <script src="app/matricula/matriculaeditar/matriculaeditar.js"></script>
+      <script src="app/matricula/matriculanueva/matriculanueva.controller.js"></script>
+      <script src="app/matricula/matriculanueva/matriculanueva.js"></script>
       <script src="app/account/settings/settings.controller.js"></script>
       <script src="components/auth/auth.service.js"></script>
       <script src="components/auth/interceptor.service.js"></script>
