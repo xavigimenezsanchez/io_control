@@ -1,0 +1,18 @@
+<navbar></navbar>
+
+<div class="container">
+ 
+  <h1>Destinos</h1>
+
+  <ul class="list-group user-list">
+    <li class="list-group-item" ng-repeat="destino in destinos">
+	    <div class="user-info">
+	        <strong>{{destino.name}}</strong><br>
+	        <span class="text-muted">{{destino.info}}</span>
+	    </div>
+	    <a ng-click="edit(destino)" class="trash"><span class="fa fa-edit fa-2x"></span></a>
+        <a ng-click="delete(destino)" class="trash"><span class="fa fa-trash fa-2x"></span></a>
+        
+    </li>
+  </ul>
+</div>
