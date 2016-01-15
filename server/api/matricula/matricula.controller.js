@@ -70,7 +70,9 @@ export function index(req, res) {
 
 // Gets a single Matricula from the DB
 export function show(req, res) {
-  Matricula.findByIdAsync(req.params.id)
+  //Matricula.findByIdAsync(req.params.id)
+  Matricula.findById(req.params.id)
+    .populate('company')
     .then(handleEntityNotFound(res))
     .then(respondWithResult(res))
     .catch(handleError(res));

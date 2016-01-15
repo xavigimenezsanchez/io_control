@@ -6,6 +6,7 @@ angular.module('ioControlApp')
       .state('matricula', {
         url: '/matricula',
         templateUrl: 'app/matricula/matricula.html',
-        controller: 'MatriculaCtrl'
+        controller: 'MatriculaCtrl',
+        authenticate: ['admin','User']
       });
   });
