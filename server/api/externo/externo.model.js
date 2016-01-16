@@ -3,9 +3,26 @@
 var mongoose = require('bluebird').promisifyAll(require('mongoose'));
 
 var ExternoSchema = new mongoose.Schema({
-  name: String,
-  info: String,
-  active: Boolean
+  name: 	String,
+  surname: 	String,
+  dni: 		String,
+  language: {
+  	type: mongoose.Schema.Types.ObjectId,
+  	ref: 'Idioma'
+  },
+  info: 	String,
+  matricula: {
+  	//If matricula it is not necessary
+  	//comany
+  	type: mongoose.Schema.Types.ObjectId,
+  	ref: 'Matricula'
+  },
+  company: {
+  	// If externo haven't matricula
+  	type: mongoose.Schema.Types.ObjectId,
+  	ref: 'Empresa'
+  },
+  active: 	Boolean
 });
 
 export default mongoose.model('Externo', ExternoSchema);

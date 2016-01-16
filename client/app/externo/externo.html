@@ -1,1 +1,19 @@
-<div>This is the externo view.</div>
+<navbar></navbar>
+
+<div class="container">
+ 
+  <h1>Matriculas</h1>
+
+  <ul class="list-group user-list">
+    <li class="list-group-item" ng-repeat="matricula in matriculas">
+	    <div class="user-info">
+	        <strong>{{matricula.name}}</strong><br>
+          <dd>Empresa: {{matricula.company.name}}</dd>
+	        <span class="text-muted">Información:{{matricula.info}}</span>
+	    </div>
+	    <a ng-click="edit(matricula)" class="trash"><span class="fa fa-edit fa-2x"></span></a>
+        <a ng-click="delete(matricula)" class="trash"><span class="fa fa-trash fa-2x"></span></a>
+        
+    </li>
+  </ul>
+</div>
