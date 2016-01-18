@@ -1,1 +1,18 @@
-<div>This is the idioma view.</div>
+<navbar></navbar>
+
+<div class="container">
+ 
+  <h1>Idiomes</h1>
+
+  <ul class="list-group user-list">
+    <li class="list-group-item" ng-repeat="idioma in idiomas">
+	    <div class="user-info">
+	        <strong>{{idioma.name}}</strong><br>
+	        <span class="text-muted">{{idioma.info}}</span>
+	    </div>
+	    <a ng-click="edit(idioma)" class="trash"><span class="fa fa-edit fa-2x"></span></a>
+        <a ng-click="delete(idioma)" class="trash"><span class="fa fa-trash fa-2x"></span></a>
+        
+    </li>
+  </ul>
+</div>
