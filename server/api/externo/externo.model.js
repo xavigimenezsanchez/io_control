@@ -1,6 +1,7 @@
 'use strict';
 
 var mongoose = require('bluebird').promisifyAll(require('mongoose'));
+var deepPopulate = require('mongoose-deep-populate')(mongoose);
 
 var ExternoSchema = new mongoose.Schema({
   name: 	String,
@@ -26,4 +27,5 @@ var ExternoSchema = new mongoose.Schema({
   active: 	Boolean
 });
 
+ExternoSchema.plugin(deepPopulate);
 export default mongoose.model('Externo', ExternoSchema);

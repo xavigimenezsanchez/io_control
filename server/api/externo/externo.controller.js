@@ -12,6 +12,8 @@
 import _ from 'lodash';
 import Externo from './externo.model';
 
+
+
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
   return function(entity) {
@@ -63,7 +65,8 @@ function handleError(res, statusCode) {
 export function index(req, res) {
   //Externo.findAsync()
   Externo.find()
-    .populate({path:'matricula',populate: {path: 'company'}})
+    .populate('matricula')
+    .deepPopulate('matricula.company')
     .populate('company')
     .populate('language')
     .then(respondWithResult(res))

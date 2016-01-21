@@ -10,6 +10,9 @@
 	        <strong>{{externo.name}}&nbsp;{{externo.surname}}</strong><br>
           <dd>DNI: {{externo.dni}}</dd>
           <dd ng-if="!externo.haveNumberPlate">Empresa: {{externo.company.name}}</dd>
+          <dd ng-if="externo.haveNumberPlate">Matrícula: {{externo.matricula.name}}</dd>
+          <dd ng-if="externo.haveNumberPlate">Empresa: {{externo.matricula.company.name}}</dd>
+          <dd>Idioma: {{externo.language.name}} </dd>
 	        <span class="text-muted">Información:{{externo.info}}</span>
 	    </div>
 	    <a ng-click="edit(externo)" class="trash"><span class="fa fa-edit fa-2x"></span></a>
