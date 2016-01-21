@@ -2,8 +2,10 @@
 
 var mongoose = require('bluebird').promisifyAll(require('mongoose'));
 var deepPopulate = require('mongoose-deep-populate')(mongoose);
-
+var autoIncrement = require('mongoose-auto-increment');
+autoIncrement.initialize(mongoose);
 var ExternoSchema = new mongoose.Schema({
+  number: Number,
   name: 	String,
   surname: 	String,
   dni: 		String,
@@ -28,4 +30,5 @@ var ExternoSchema = new mongoose.Schema({
 });
 
 ExternoSchema.plugin(deepPopulate);
+ExternoSchema.plugin(autoIncrement.plugin, {model: 'Externo', field:'number'});
 export default mongoose.model('Externo', ExternoSchema);

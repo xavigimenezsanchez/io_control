@@ -7,7 +7,7 @@
   <ul class="list-group user-list">
     <li class="list-group-item" ng-repeat="externo in externos">
 	    <div class="user-info">
-	        <strong>{{externo.name}}&nbsp;{{externo.surname}}</strong><br>
+	        <strong>{{externo.number}}: {{externo.name}}&nbsp;{{externo.surname}}</strong><br>
           <dd>DNI: {{externo.dni}}</dd>
           <dd ng-if="!externo.haveNumberPlate">Empresa: {{externo.company.name}}</dd>
           <dd ng-if="externo.haveNumberPlate">Matrícula: {{externo.matricula.name}}</dd>
