@@ -11,6 +11,7 @@ var ExternoSchema = new mongoose.Schema({
   	ref: 'Idioma'
   },
   info: 	String,
+  haveNumberPlate: Boolean,
   matricula: {
   	//If matricula it is not necessary
   	//comany

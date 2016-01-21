@@ -63,7 +63,9 @@ function handleError(res, statusCode) {
 export function index(req, res) {
   //Externo.findAsync()
   Externo.find()
-    .populate('matricula')
+    .populate({path:'matricula',populate: {path: 'company'}})
+    .populate('company')
+    .populate('language')
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
@@ -73,6 +75,8 @@ export function show(req, res) {
   //Externo.findByIdAsync(req.params.id)
   Externo.findById(req.params.id)
     .populate('matricula')
+    .populate('company')
+    .populate('language')
     .then(handleEntityNotFound(res))
     .then(respondWithResult(res))
     .catch(handleError(res));

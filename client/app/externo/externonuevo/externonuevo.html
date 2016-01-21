@@ -3,7 +3,7 @@
 <div class="container">
 	<form>
 	  <div class="form-group">
-	    <label for="name">Externo</label>
+	    <label for="name">Nombre</label>
 	    <div class="well well-lg danger" ng-if="error" >
 	      {{error}}
 	    </div>
@@ -11,11 +11,64 @@
 	  </div>
 	  <div class="form-group">
 	    <label for="surname">Apellidos</label>
-	    <input ng-model="matricula.info" type="text" class="form-control" id="surname" placeholder="Apellidos">
+	    <input ng-model="externo.surname" type="text" class="form-control" id="surname" placeholder="Apellidos externo">
 	  </div>
 	  <div class="form-group">
+	    <label for="surname">DNI/ID</label>
+	    <input ng-model="externo.dni" type="text" class="form-control" id="surname" placeholder="DNI o identificación">
+	  </div>
+	  <div class="form-group">
+	    <label for="surname">Informació</label>
+	    <input ng-model="externo.info" type="text" class="form-control" id="surname" placeholder="Información opcional">
+	  </div>
+
+	  <div class="form-group">
+	  		<label for="company">Idioma</label>
+		  <ui-select ng-model="externo.language">
+			    <ui-select-match>
+			        <span ng-bind="$select.selected.name"></span>
+			    </ui-select-match>
+			    <ui-select-choices repeat="item in (idiomas | filter: $select.search) track by item._id">
+			        <span ng-bind="item.name"></span>
+			    </ui-select-choices>
+			</ui-select>	
+	  </div>
+
+
+
+	  <div class="form-group">
+	    <label class="col-lg-2 control-label">Coche</label>
+	      <div class="col-lg-10">
+	        <div class="radio">
+	          <label>
+	            <input type="radio" ng-model="externo.haveNumberPlate" name="optionsRadios" id="optionsRadios1" data-ng-value="true" checked>
+	            Sí
+	          </label>
+	        </div>
+	        <div class="radio">
+	          <label>
+	            <input type="radio" ng-model="externo.haveNumberPlate" name="optionsRadios" id="optionsRadios2" data-ng-value="false">
+	            No
+	          </label>
+	        </div>
+	      </div>
+	  </div>
+	  
+	  <div class="form-group" ng-show="externo.haveNumberPlate">
+	  		<label for="company">Matricula</label>
+		  <ui-select ng-model="externo.matricula">
+			    <ui-select-match>
+			        <span ng-bind="$select.selected.name"></span>
+			    </ui-select-match>
+			    <ui-select-choices repeat="item in (matriculas | filter: $select.search) track by item._id">
+			        <span ng-bind="item.name"></span>
+			    </ui-select-choices>
+			</ui-select>	
+	  </div>
+
+	  <div class="form-group" ng-show="!externo.haveNumberPlate">
 	  		<label for="company">Empresa</label>
-		  <ui-select ng-model="matricula.company">
+		  <ui-select ng-model="externo.company">
 			    <ui-select-match>
 			        <span ng-bind="$select.selected.name"></span>
 			    </ui-select-match>
