@@ -12,6 +12,8 @@
 import _ from 'lodash';
 import Externo from './externo.model';
 
+//var pdfDocument = require('pdfkit');
+//var blobStream = require('blob-stream');
 
 
 function respondWithResult(res, statusCode) {
@@ -78,6 +80,7 @@ export function show(req, res) {
   //Externo.findByIdAsync(req.params.id)
   Externo.findById(req.params.id)
     .populate('matricula')
+    .deepPopulate('matricula.company')
     .populate('company')
     .populate('language')
     .then(handleEntityNotFound(res))
@@ -111,3 +114,27 @@ export function destroy(req, res) {
     .then(removeEntity(res))
     .catch(handleError(res));
 }
+
+// Create a pdf from DB data
+/*
+export function pdf(req,res) {
+  var externo = {};
+  var doc = new pdfDocument();
+  var stream = doc.pipe(blobStream());
+  doc.fontSize(25)
+   .text('Here is some vector graphics...', 100, 80);
+   doc.end()
+   stream.on('finish', function() {
+      var url = stream.toBlobURL('application/pdf');
+      res.patata = 'holaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa';
+      respondWithResult(res,200);
+    });*/
+  /*
+  Externo.findById(req.params.id)
+    .populate('matricula')
+    .populate('company')
+    .populate('language')
+    .then(handleEntityNotFound(res))
+    .then(respondWithResult(res))
+    .catch(handleError(res));
+} */

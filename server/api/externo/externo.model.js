@@ -9,6 +9,7 @@ var ExternoSchema = new mongoose.Schema({
   name: 	String,
   surname: 	String,
   dni: 		String,
+  validate: {type: Date, default: Date.now },
   language: {
   	type: mongoose.Schema.Types.ObjectId,
   	ref: 'Idioma'

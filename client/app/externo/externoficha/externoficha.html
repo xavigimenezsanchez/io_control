@@ -1,0 +1,54 @@
+<button id="botoImprimir" ng-click="imprimir()">Imprimir</button>
+<div class="ficha">
+	<img src="assets/images/EPALogo.png"> 
+	<br><br>
+	<dd>
+	<strong>Número Cliente: </strong>{{externo.number}}
+	</dd>
+
+	<dd>
+	<strong>Nombre:</strong>
+	{{externo.name}}
+	</dd>
+	<dd>
+	<strong>Apellidos:</strong>
+		{{externo.surname}}
+	</dd>
+	<dd ng-if="!externo.haveNumberPlate"><strong>Empresa:</strong> {{externo.company.name}}</dd>
+    <dd ng-if="externo.haveNumberPlate"><strong>Empresa:</strong> {{externo.matricula.company.name}}</dd>
+    Válido desde
+
+</div>
+
+<hr/>
+
+<div class="ficha">
+	<img src="assets/images/EPALogo.png"> 
+	<strong>Número Cliente: </strong>{{externo.number}}
+	<strong>Nombre Completo</strong>
+	{{externo.name}} {{externo.surname}}
+	<strong>Empresa</strong>
+	{{externo.company.name}}
+
+</div>
+
+<hr/>
+
+<div>
+	<strong>TODAS LAS PERSONAS QUE REALIZAN TRABAJOS EN LAS INSTALACIONES DE ENPLATER DEBEN HABER SIDO INFORMADAS SOBRE LOS ASPECTOS QUE SE MENCIONAN A CONTINUACIÓN. LA FIRMA DE ESTE DOCUMENTO LES COMPROMETE EN EL CUMPLIMIENTO DE LAS MISMAS</strong>
+</div>
+<div>
+	<ul>
+		<li>Debe haber sido formado por su empresa de los riesgos derivados de su propia actividad.</li>
+		<li>Debe haber sido informado por Enplater de los riesgos derivados de las instalacionesy actividades de Enplater.</li>
+		<li>Le han sido indicadas las zonas por las cuales puede o no puede transitar.</li>
+		<li>En caso de acceder a zonas que se le han indicado con riesgo de contaminación higiénica deberá cumplir las normas de nuestro reglamento interno.</li>
+		<li>Se debe pedir permiso para los trabajos considerados en situación de riesgo (fuego, corte y soldadura).</li>
+		<li>Puede depositar los residuos no especiales en los contenedores habilitados.</li>
+		<li>Los residuos especiales deben ser tratados por su propia empresa.</li>
+		<li>Deberà disponer de las fichas de seguridad de los productos que se usen en la szonas de producción</li>
+	</ul>
+</div>
+<div>
+ <p>Fecha y firma</p>
+</div>

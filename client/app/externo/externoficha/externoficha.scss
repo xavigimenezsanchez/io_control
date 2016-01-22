@@ -1,0 +1,21 @@
+@page {
+        margin: 6mm;
+        size: A4 portrait;
+     }
+
+@media print {
+	#botoImprimir {
+		display: none;
+	}
+}
+
+.ficha {
+	padding: 0.5cm;
+	border: 1px solid black;
+	font-weight: 500;
+	width: 9cm;
+	height: 6cm;
+	img {
+		width: 2cm;
+	}
+}
