@@ -100,6 +100,7 @@ export function update(req, res) {
   if (req.body._id) {
     delete req.body._id;
   }
+  console.log(req);
   Externo.findByIdAsync(req.params.id)
     .then(handleEntityNotFound(res))
     .then(saveUpdates(req.body))
@@ -107,6 +108,18 @@ export function update(req, res) {
     .catch(handleError(res));
 }
 
+export function validar(req, res) {
+  
+  
+  req.body.valid = Date.now();
+  
+  Externo.findByIdAsync(req.params.id)
+    .then(handleEntityNotFound(res))
+    .then(saveUpdates(req.body))
+    .then(respondWithResult(res))
+    .catch(handleError(res));
+  respondWithResult(200);
+}
 // Deletes a Externo from the DB
 export function destroy(req, res) {
   Externo.findByIdAsync(req.params.id)

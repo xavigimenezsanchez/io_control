@@ -16,7 +16,7 @@
 	</dd>
 	<dd ng-if="!externo.haveNumberPlate"><strong>Empresa:</strong> {{externo.company.name}}</dd>
     <dd ng-if="externo.haveNumberPlate"><strong>Empresa:</strong> {{externo.matricula.company.name}}</dd>
-    Válido desde
+    <dd><strong>Válido desde: </strong>{{externo.valid  | date : 'dd/MM/yyyy'}}<strong>hasta el: </strong>{{externo.valid.addYears(1)  | date : 'dd/MM/yyyy'}}</dd>
 
 </div>
 

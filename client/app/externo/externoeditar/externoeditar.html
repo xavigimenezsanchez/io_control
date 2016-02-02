@@ -17,6 +17,11 @@
 	    <label for="surname">DNI/ID</label>
 	    <input ng-model="externo.dni" type="text" class="form-control" id="surname" placeholder="DNI o identificación">
 	  </div>
+	  
+	  <div class="form-group">
+	    <label for="valid">Válido hasta el {{externo.valid  | date : 'dd/MM/yyyy'}}</label>
+	    <button ng-click="validar()" class="btn btn-warning">Validar</button>
+	  </div>
 	  <div class="form-group">
 	    <label for="surname">Informació</label>
 	    <input ng-model="externo.info" type="text" class="form-control" id="surname" placeholder="Información opcional">
@@ -78,6 +83,6 @@
 			</ui-select>	
 	  </div>
 	  
-	  <button ng-click="edit()" class="btn btn-default">Añadir</button>
+	  <button ng-click="edit()" class="btn btn-success">Añadir</button>
 	</form>
 </div>

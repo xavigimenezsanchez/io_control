@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('ioControlApp')
-  .controller('ExternoeditarCtrl', function ($scope, $stateParams, Idioma,Empresa,Matricula, Externo) {
+  .controller('ExternoeditarCtrl', function ($scope, $stateParams, Idioma, Empresa, Matricula, Externo) {
   	Idioma.query(function(idiomas) {
     	$scope.idiomas = idiomas;
     });
@@ -20,6 +20,10 @@ angular.module('ioControlApp')
 
     $scope.edit = function() {
     	Externo.update({id:$scope.externo._id},$scope.externo);
+    }
+
+    $scope.validar = function() {
+        Externo.validar({id:$scope.externo._id},$scope.externo);
     }
 
     $scope.changeCar = function() {

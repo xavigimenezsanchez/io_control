@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('ioControlApp')
-  .controller('MatriculaCtrl', function ($scope,$state,Matricula) {
+  .controller('MatriculaCtrl', function ($scope,$state,Matricula,Historico) {
     Matricula.query(function(matriculas){
     	$scope.matriculas = matriculas;
     });
@@ -15,4 +15,13 @@ angular.module('ioControlApp')
     $scope.edit = function(matricula) {
     	$state.go('matriculaeditar',{matricula:matricula._id});
     };
+
+    $scope.in = function(matricula) {
+        Historico.save({'in':Date.now(),'it': {"reference" : "matricula", "id":matricula._id}});
+    }
+
+    $scope.out = function(matricula) {
+        Historico.save({'out':Date.now(),'it': {"reference" : "matricula", "id":matricula._id}});
+    }
   });
+

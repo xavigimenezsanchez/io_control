@@ -14,10 +14,13 @@
           <dd ng-if="externo.haveNumberPlate">Empresa: {{externo.matricula.company.name}}</dd>
           <dd>Idioma: {{externo.language.name}} </dd>
 	        <span class="text-muted">Información:{{externo.info}}</span>
+          <dd>Válido hasta el {{externo.valid  | date : 'dd/MM/yyyy'}}</dd>
 	    </div>
 	    <a ng-click="edit(externo)" class="trash"><span class="fa fa-edit fa-2x"></span></a>
         <a ng-click="delete(externo)" class="trash"><span class="fa fa-trash fa-2x"></span></a>
         <a ng-click="print(externo)" class="trash"><span class="fa fa-print fa-2x"></span></a>
+        <a ng-click="in(externo)" class="trash"><span class="fa fa-sign-in fa-2x"></span></a>
+        <a ng-click="out(externo)" class="trash"><span class="fa fa-sign-out fa-2x"></span></a>
         
     </li>
   </ul>
