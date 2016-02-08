@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('ioControlApp')
-  .controller('MatriculaCtrl', function ($scope,$state,Matricula,Historico) {
+  .controller('MatriculaCtrl', function ($scope,$state,Matricula,Historico, Modal) {
     Matricula.query(function(matriculas){
     	$scope.matriculas = matriculas;
     });
@@ -17,11 +17,20 @@ angular.module('ioControlApp')
     };
 
     $scope.in = function(matricula) {
-        Historico.save({'in':Date.now(),'it': {"reference" : "matricula", "id":matricula._id}});
+        Historico.save({'in':Date.now(),'it': {"reference" : "matricula", "id":matricula._id}}, function(his) {
+            console.log(his);
+        },function(err) {
+            if (err.status == 406) {
+                //modal
+                Modal.openModal();
+            }
+        });
     }
 
     $scope.out = function(matricula) {
-        Historico.save({'out':Date.now(),'it': {"reference" : "matricula", "id":matricula._id}});
+        Historico.out({'out':Date.now(),'it': {"reference" : "matricula", "id":matricula._id}});
     }
-  });
 
+    
+    $scope.provaModal = Modal.warning.show('Aixpò és una prova','Això és el text de la prova');
+});

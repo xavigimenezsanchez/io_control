@@ -11,6 +11,7 @@
 
 import _ from 'lodash';
 import Historico from './historico.model';
+import Matricula from '../matricula/matricula.model';
 
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
@@ -59,6 +60,33 @@ function handleError(res, statusCode) {
   };
 }
 
+function respondMatricula(req, res, statusCode) {
+   statusCode = statusCode || 200;
+  return function(entity) {
+    if (entity) {
+      res.status(406).json({"error":"Matricula ja ha entrado"});
+    } else {
+      Historico.createAsync(req.body)
+        .then(respondWithResult(res, 201))
+        .catch(handleError(res));
+    }
+  }
+}
+
+function respondMatriculaOut(req, res, statusCode) {
+   statusCode = statusCode || 200;
+  return function(entity) {
+    if (!entity) {
+      res.status(406).json({"error":"Matricula no ha entrado"});
+    } else {
+      Historico.findByIdAsync(entity._id)
+        .then(handleEntityNotFound(res))
+        .then(saveUpdates(req.body))
+        .then(respondWithResult(res))
+        .catch(handleError(res))
+    }
+  }
+}
 // Gets a list of Historicos
 export function index(req, res) {
   Historico.findAsync()
@@ -66,7 +94,14 @@ export function index(req, res) {
     .catch(handleError(res));
 }
 export function indexMatricula(req, res) {
-  Historico.findAsync({"it.reference" : "matricula" })
+  Historico.find({"it.reference" : "matricula" })
+    .populate({ path: "it.id", model: Matricula})
+    .then(respondWithResult(res))
+    .catch(handleError(res));
+}
+export function indexMatriculaIn(req, res) {
+  Historico.find({"it.reference" : "matricula", "out" :{$exists:false}})
+    .populate({ path: "it.id", model: Matricula})
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
@@ -74,14 +109,16 @@ export function indexMatricula(req, res) {
 export function show(req, res) {
   Historico.findByIdAsync(req.params.id)
     .then(handleEntityNotFound(res))
-    .then(respondWithResult(res))
-    .catch(handleError(res));
+    .then(respondWithResult(res));
+//    .catch(handleError(res));
 }
 
 // Creates a new Historico in the DB
 export function create(req, res) {
   Historico.findOne({"it.reference" : "matricula" , "it.id" : req.body.it.id, "out" : {$exists: false}})
-    .then(respondWithResult(res, 201))
+    .then(respondMatricula(req,res))
+    .catch(handleError(res));
+    //.then(respondWithResult(res, 201))
   /*  
   Historico.createAsync(req.body)
     .then(respondWithResult(res, 201))
@@ -91,14 +128,15 @@ export function create(req, res) {
 
 // Updates an existing Historico in the DB
 export function update(req, res) {
-  if (req.body._id) {
-    delete req.body._id;
-  }
+  Historico.findOne({"it.reference" : "matricula" , "it.id" : req.body.it.id, "in" : {$exists: true}, "out": {$exists: false}})
+    .then(respondMatriculaOut(req,res))
+    .catch(handleError(res));
+  /*  
   Historico.findByIdAsync(req.params.id)
     .then(handleEntityNotFound(res))
     .then(saveUpdates(req.body))
     .then(respondWithResult(res))
-    .catch(handleError(res));
+    .catch(handleError(res));*/
 }
 
 // Deletes a Historico from the DB
