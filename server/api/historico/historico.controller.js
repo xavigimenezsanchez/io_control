@@ -12,7 +12,17 @@
 import _ from 'lodash';
 import Historico from './historico.model';
 import Matricula from '../matricula/matricula.model';
+import Empresa from '../empresa/empresa.model';
 
+var each = require('async-each');
+function respondOK(res, statusCode) {
+    statusCode = statusCode || 200;
+    return function(entity) {
+        if (entity) {
+            res.status(statusCode).json({'status':(entity.length != 0)});
+        }
+    }
+}
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
   return function(entity) {
@@ -100,11 +110,46 @@ export function indexMatricula(req, res) {
     .catch(handleError(res));
 }
 export function indexMatriculaIn(req, res) {
-  Historico.find({"it.reference" : "matricula", "out" :{$exists:false}})
-    .populate({ path: "it.id", model: Matricula})
-    .then(respondWithResult(res))
-    .catch(handleError(res));
+
+  Historico.find({"it.reference" : "matricula", "out" : {$exists:false}})
+    .populate({ path: "it.id", model: Matricula })
+    //.populate({ path: "it.id.company", model: Empresa})
+    .lean()
+    .exec(function(err, matricules) {
+      var len = matricules.length;
+      var aux = matricules;
+      var counter = 0;
+      each(matricules,
+            function(m,il,i) {
+              Empresa.findById(m.it.id.company, function(err,c) {
+                aux[counter].it.id.company = c.name;
+                console.log(aux[counter]);
+                if (++counter == len) {
+                  console.log(aux);
+                  res.status(200).json(aux);
+                  console.log('patata2');
+                }
+              });
+            },
+            function(err,mat) {
+              console.log('---------------------------------------');
+              console.log(mat);
+              
+            });
+      //respondWithResult(res);
+      
+    });
+   // .catch(handleError(res));
 }
+
+export function indexMatriculaInId(req, res) {
+    console.log('+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
+    console.log(req.params.id);
+    Historico.find({"it.reference" : "matricula", "out" : {$exists:false}, "it.id":req.params.id})
+        .then(handleEntityNotFound(res))
+        .then(respondOK(res));
+}
+
 // Gets a single Historico from the DB
 export function show(req, res) {
   Historico.findByIdAsync(req.params.id)

@@ -1,1 +1,22 @@
-<div>This is the his_matricula view.</div>
+<navbar></navbar>
+
+<div class="container">
+ 
+  <h1>Matriculas dentro de Enplater</h1>
+
+  <ul class="list-group user-list">
+    <li class="list-group-item" ng-repeat="matricula in matriculas">
+	    <div class="user-info">
+            
+	        <strong>{{matricula.it.id.name}}</strong><br>
+            <strong>Entrada: </strong> {{matricula.in | date:'dd-MM-yyyy HH:mm:ss'}}<br>
+          	<dd>Empresa: {{matricula.it.id.company}}</dd>
+	        <span class="text-muted">Información:{{matricula.it.id.info}}</span>
+	    </div>
+	    <a ng-click="edit(matricula)" class="trash"><span class="fa fa-edit fa-2x"></span></a>
+      	<a ng-click="delete(matricula)" class="trash"><span class="fa fa-trash fa-2x"></span></a>
+      	<a ng-click="in(matricula)" class="trash"><span class="fa fa-sign-in fa-2x"></span></a>
+      	<a ng-click="out(matricula)" class="trash"><span class="fa fa-sign-out fa-2x"></span></a>        
+    </li>
+  </ul>
+</div>

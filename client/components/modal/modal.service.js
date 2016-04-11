@@ -105,6 +105,31 @@ angular.module('ioControlApp')
             }, 'modal-warning');
           };
           }
+      },
+
+      /* Success modals */
+      success: {
+          show(titol='', missatge='',  del = angular.noop) {
+            return function() {
+            var args = Array.prototype.slice.call(arguments),
+                name = args.shift(),
+                showModal;
+
+            showModal = openWarning({
+              modal: {
+                title: titol,
+                html: '<p> <strong>' + missatge + '</strong> </p>',
+                buttons: [{
+                  classes: 'btn-success',
+                  text: 'Leido',
+                  click: function(e) {
+                    showModal.dismiss(e);
+                  }
+                }]
+              }
+            }, 'modal-success');
+          };
+          }
       }
 
 

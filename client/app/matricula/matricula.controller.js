@@ -17,20 +17,25 @@ angular.module('ioControlApp')
     };
 
     $scope.in = function(matricula) {
-        Historico.save({'in':Date.now(),'it': {"reference" : "matricula", "id":matricula._id}}, function(his) {
-            console.log(his);
+        Historico.all.save({'in':Date.now(),'it': {"reference" : "matricula", "id":matricula._id}}, function(his) {
+            Modal.success.show('Hecho','Matricula ' + matricula.name + ' ha entrado a Enplater')();
+
         },function(err) {
             if (err.status == 406) {
                 //modal
-                Modal.openModal();
+                Modal.warning.show('Error','Matricula ' + matricula.name +' ya ha entrado a las instalaciones de Enplater')();
             }
         });
     }
 
     $scope.out = function(matricula) {
-        Historico.out({'out':Date.now(),'it': {"reference" : "matricula", "id":matricula._id}});
+        Historico.all.out({'out':Date.now(),'it': {"reference" : "matricula", "id":matricula._id}}, function(his) {
+            Modal.success.show('Hecho','Matricula ' + matricula.name + ' ha salido de Enplater')();
+        }, function(err) {
+            if (err.status == 406) {
+                Modal.warning.show('Error', 'Matricula ' + matricula.name +' no ha entrado a las instalaciones de Enplater')();
+            }
+        });
     }
 
-    
-    $scope.provaModal = Modal.warning.show('Aixpò és una prova','Això és el text de la prova');
 });
